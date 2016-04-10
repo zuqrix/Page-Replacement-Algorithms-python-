@@ -4,3 +4,4 @@ The python code is the implementation of page replacement algorithms( FIFO, LRU(
 
 Belady's anamoly is also demonstrated.
 Effect of reversing the reference string is also shown.
+assign.py has code.
