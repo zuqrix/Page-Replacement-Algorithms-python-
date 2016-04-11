@@ -8,6 +8,9 @@ def base():
   for i in range(20):  #reference string random generation
     ref.append(randint(0,9))
   revref=ref[::-1]     #Reverse reference string
+  print("reference string ")
+  print(ref)
+  print(revref)
   while 1:
     print(" 1: FIFO 2: LRU 3: Optimal 4: Second Chance 5:exit ")
     ch=int(input())
