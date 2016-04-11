@@ -104,19 +104,20 @@ def fifo(ref,num):
   i=0
   #first fill all the free frames and later page replacement by fifo
   while(marker!=num and i<len(ref)):
-    if (ref[i] not in que):
+    if (ref[i] not in frames):
       frames[marker]=ref[i]
       marker+=1
       pgf+=1
     i+=1
-    print(que)
+    print(frames)
   marker=0
   for i in range(i,len(ref)):
-    if(ref[i] not in que):
+    if(ref[i] not in frames):
       pgf+=1
       frames[marker]=ref[i]
       marker=(marker+1)%num
-    print(que)
+    print(frames)
+  frames=[]
   return pgf
   
 #---------------LRU---------------
@@ -132,21 +133,77 @@ def lru(ref):
       marker+=1
       pgf+=1
     i+=1
-    print(que)
+    print(frames)
   while(i<len(ref)):
-    if(ref[i] not in que):
+    if(ref[i] not in frames):
       least=-1
       ret_val=-1
-      for j in range(3):
+      for j in range(num):
         x=ref[i::-1].index(que[j])
         if(x>least):
           least=x
-          ret_val=que[j]
-      x=que.index(ret_val)
-      que[x]=ref[i]
+          ret_val=frames[j]
+      x=frames.index(ret_val)
+      frames[x]=ref[i]
       pgf+=1
     i+=1
-    print(que)
+    print(frames)
+  frames=[]
   return pgf
+  
+#-----------OPT--------
+def opt(ref,num):
+  for i in range(num):
+    frames.append(-1)
+  pgf,marker,i=0,0,0
+  while(marker!=num and i<len(ref)):
+    if (ref[i] not in frames):
+      frames[marker]=ref[i]
+      marker+=1
+      pgf+=1
+    i+=1
+    print(frames)
+  while(i<len(ref)):
+    if(ref[i] not in frames):
+      value=find_opt(num,ref,i)
+      frames[value]=ref[i]
+      pgf+=1
+    i+=1
+    print(frames)
+  frames=[]  
+  return pgf
+  
+#Optimal page selection
+
+def find_opt(num,ref,i):
+  array=[]
+  for i in range(num):
+    array.append(0)
+  ret_val,last,temp=-1,-1,-1
+  for j in range(num):
+    if frames[j] in ref[i:]:
+      array[j]=1
+      temp=ref[i:].index(que[j])
+    if temp>last:
+      last=temp
+      ret_val=j
+  if array.count(1)==0:
+    return 0
+  elif array.count(1)==1:
+    x=array.index(1)
+    if(x==0):
+      return 1
+    else:
+      return 0
+  elif array.count(1)>1 and array.count(1)<num-1:
+    x=array.index(0)
+    return x
+  elif array.count(1)==num-1:
+    x=array.index(0)
+    return x
+  else:
+    return ret_val
+  
+  
   
   
