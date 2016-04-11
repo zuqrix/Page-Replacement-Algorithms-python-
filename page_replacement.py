@@ -1,8 +1,7 @@
 #God bless India
 #author- Kushal(Zuqrix)
 from random import randint
-frames=[]
-pgf=0   # Number of page faults variable
+
 def base():
   #Reference string is randomly generated..reference string of own choice can be added
   ref=[]
@@ -94,10 +93,11 @@ def base():
 def user_input():
   print(" How many frames do you wish to use ")
   no_frames=int(input())
-  return no_frames#
+  return no_frames 
 
 #-------------FIFO-----------------  
 def fifo(ref,num):
+  frames=[]
   pgf=0
   for i in range(num):
     frames.append(-1)
@@ -123,6 +123,7 @@ def fifo(ref,num):
   
 #---------------LRU---------------
 def lru(ref):
+  frames=[]
   pgf=0
   for i in range(num):
     frames.append(-1)
@@ -154,6 +155,7 @@ def lru(ref):
   
 #-----------OPT--------
 def opt(ref,num):
+  frames=[]
   for i in range(num):
     frames.append(-1)
   pgf,marker,i=0,0,0
