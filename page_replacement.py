@@ -1,5 +1,6 @@
 #God bless India
 #author- Kushal(Zuqrix)
+from random import randint
 frames=[]
 pgf=0   # Number of page faults variable
 def base():
