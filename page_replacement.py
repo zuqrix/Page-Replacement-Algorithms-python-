@@ -90,12 +90,12 @@ def base():
       print("Invalid choice")
       
         
-            
 def user_input():
   print(" How many frames do you wish to use ")
   no_frames=int(input())
-  return no_frames
-  
+  return no_frames#
+
+#-------------FIFO-----------------  
 def fifo(ref,num):
   pgf=0
   for i in range(num):
@@ -116,6 +116,36 @@ def fifo(ref,num):
       pgf+=1
       frames[marker]=ref[i]
       marker=(marker+1)%num
+    print(que)
+  return pgf
+  
+#---------------LRU---------------
+def lru(ref):
+  pgf=0
+  for i in range(num):
+    frames.append(-1)
+  marker=0
+  i=0
+  while(marker!=num and i<len(ref)):
+    if (ref[i] not in frames):
+      frames[marker]=ref[i]
+      marker+=1
+      pgf+=1
+    i+=1
+    print(que)
+  while(i<len(ref)):
+    if(ref[i] not in que):
+      least=-1
+      ret_val=-1
+      for j in range(3):
+        x=ref[i::-1].index(que[j])
+        if(x>least):
+          least=x
+          ret_val=que[j]
+      x=que.index(ret_val)
+      que[x]=ref[i]
+      pgf+=1
+    i+=1
     print(que)
   return pgf
   
