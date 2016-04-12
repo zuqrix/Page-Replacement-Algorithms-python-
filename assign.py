@@ -1,4 +1,5 @@
 #Jai Hind
+#--- Code is pretty long.. REFER page_replacement.py .....Its an improvised code
 #random number generation
 from random import randint
 
